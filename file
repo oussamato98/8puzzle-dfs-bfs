@@ -1,0 +1,68 @@
+from queue import Queue
+from graphviz import Digraph
+import os
+
+class Node:
+    def __init__(self, state, parent, action, depth):
+        self.state = state
+        self.parent = parent
+        self.action = action
+        self.depth = depth
+        self.id = "".join(str(n) for n in self.state)
+
+    def __repr__(self):
+        joined_string = " ".join(str(n) for n in self.state)
+        return joined_string[0:5]+"\n"+joined_string[6:11]+"\n"+joined_string[12:17]
+
+def possible_moves(state):
+    # to do
+    return pos_moves
+
+def generate_state(state, move):
+    # to do
+    return newstate
+
+def create_node(state, parent, action, depth):
+    return Node(state, parent, action, depth)
+
+def expand_node(node):
+    expanded_nodes = []
+    for move in possible_moves(node.state):
+        expanded_nodes.append(create_node(generate_state(node.state, move), node.id, move, node.depth + 1))
+    return expanded_nodes
+
+def dfs():
+    # to do
+
+
+def bfs():
+    # to do
+
+def display(title, path, file):
+    # Start - Graphs init
+    graph_dfs = Digraph(comment=title)
+    step = 0
+    color = "black"
+    for node in path:
+        node_str = node.__str__()
+        if node.state == goal: color = "green"
+        graph_dfs.node(str(node.id), node_str, color=color)
+        graph_dfs.edge(str(node.parent), str(node.id), str(node.action) + "\n" + str(step))
+        step += 1
+    # Start - Graphs rendering
+    graph_dfs.render(str(os.getcwd() + '/outputs/' + file + '.gv'), view=True)
+    # End - Graphs rendering
+
+def astar():
+    # to do
+
+def bestFirst():
+    # to do
+
+goal = [1, 2, 3, 8, 0, 4, 7, 6, 5]
+initial = [2, 8, 3, 1, 6, 4, 7, 0, 5]
+
+# display("A star graph", astar(), "astar")
+# display("Best First graph", bestFirst(), "bf")
+# display("DFS graph", dfs(), "dfs")
+display("BFS graph", bfs(), "bfs")
